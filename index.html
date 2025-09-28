@@ -1,6 +1,66 @@
-  <title>Моё фото</title>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полноэкранное изображение</title>
+    <style>
+        /* Устанавливаем ширину и высоту всего документа и тела страницы в 100% */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Скрываем полосы прокрутки */
+            background-color: black; /* Для фонового цвета, если изображение не покрывает все */
+        }
+
+        /* Стиль для изображения */
+        .fullscreen-image {
+            /* Задаем фиксированные размеры контейнера, если это для экрана Minecraft */
+            width: 1620px;
+            height: 1080px;
+            
+            /* Важный момент: 
+               - Если изображение должно полностью ПОКРЫТЬ эти 1620x1080, обрезав лишнее:
+                 object-fit: cover;
+                 
+               - Если изображение должно ВПИСАТЬСЯ в 1620x1080, оставив поля по бокам/сверху:
+                 object-fit: contain;
+                 
+               - Если изображение должно просто растянуться, ИСКАЖАЯ пропорции (чего обычно не хотят):
+                 object-fit: fill; 
+            */
+            
+            /* Исходя из вашего комментария "фотка немного не так встала",
+               возможно, вы хотите, чтобы она заполнила весь экран, но без обрезки,
+               тогда попробуем `contain`. Если это оставляет черные поля, и вы хотите их убрать,
+               тогда вернемся к `cover` и будем считать, что обрезка части изображения допустима.
+            */
+            object-fit: contain; 
+
+            /* Центрируем изображение, если оно меньше контейнера */
+            display: block; /* Убираем лишние пробелы под изображением */
+            margin: auto; /* Центрируем по горизонтали и вертикали */
+        }
+
+        /* Можно также попробовать использовать изображение как фон для элемента */
+        .background-container {
+            width: 1620px;
+            height: 1080px;
+            background-image: url('photo_for_git.png');
+            background-size: contain; /* или 'cover', в зависимости от желаемого */
+            background-repeat: no-repeat;
+            background-position: center center;
+            /* Если вы хотите, чтобы фон был черным там, где изображение не достает */
+            background-color: black; 
+        }
+
+    </style>
 </head>
-<body style="text-align:center; margin-top:50px;">
-  <img src="photo_for_git.png" alt="Фото" style="max-width:90%;">
-</body>
+<body>
+
+    <img src="photo_for_git.png" alt="Полноэкранное изображение" class="fullscreen-image">
+
+    </body>
 </html>
